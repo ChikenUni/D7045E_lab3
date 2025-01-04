@@ -1,16 +1,16 @@
 class monochromeMaterial extends material {
-    constructor(gl, shaderPgm, colour){
-        super(gl, shaderPgm);
+    constructor(webGL, shaderPgm, colour){
+        super(webGL, shaderPgm);
         this.shaderPgm = shaderPgm;
+        this.colour = colour;
     }
 
     applyMat(transformMatrix) {
         let pgm = this.shaderPgm.getProgram();
+        let colour_loc = this.webGL.getUniformLocation(pgm, "u_colour");
+        this.webGL.uniform4fv(colour_loc, this.colour);
 
-        let colour_loc = this.gl.getUniformLocation(pgm, "u_colour");
-        this.gl.uniform4fv(colour_loc, flatten(this.colour));
-
-        let trans_loc = this.gl.getUniformLocation(pgm, "u_transformMatrix");
-        this.gl.uniformMatrix4fv(trans_loc, false, flatten(transformMatrix));
+        let trans_loc = this.webGL.getUniformLocation(pgm, "u_transformationMatrix");
+        this.webGL.uniformMatrix4fv(trans_loc, false, transformMatrix);
     }
 }

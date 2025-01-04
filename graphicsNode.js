@@ -7,12 +7,12 @@ class GraphicsNode{
     }
 
     draw() {
-        indexLen = this.mesh.indices().length;
-        this.material.applyMat();
+        let indexLen = this.mesh.getIndices().length;
+        this.material.applyMat(this.transform);
         this.webGL.drawElements(this.webGL.TRIANGLES, indexLen, this.webGL.UNSIGNED_BYTE, 0);
     }
 
-    transform(newTransform) {
-        mat4.translate(this.transform, this.transform, newTransform);
+    update(transformVector) {
+        mat4.translate(this.transform, this.transform, transformVector);
     }
 }

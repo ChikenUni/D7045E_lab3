@@ -1,32 +1,33 @@
 class Mesh {
-    constructor(gl, vertices, indices, shaderPgm){
+    constructor(webGL, vertices, indices, shaderPgm){
         this.vertices = vertices;
         this.indices = indices;
 
-        let vertexBuffer = gl.createBuffer();
-        gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
-        
-        //let vertexArray = gl.createVertexArray();
-        //gl.bindVertexArray(vertexArray);
-        let verticesArray = new Float32Array(this.vertices);
-        gl.bufferData(gl.ARRAY_BUFFER, verticesArray, gl.STATIC_DRAW);
+        let vertexArray = webGL.createVertexArray();
+        webGL.bindVertexArray(vertexArray);
 
-        let indexbuffer = gl.createBuffer();
-        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexbuffer);
-        let indicesArray = Uint8Array(this.indices);
-        gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, indicesArray, gl.STATIC_DRAW);
+        let vertexBuffer = webGL.createBuffer();
+        webGL.bindBuffer(webGL.ARRAY_BUFFER, vertexBuffer);
+        
+        let verticesArray = new Float32Array(this.vertices);
+        webGL.bufferData(webGL.ARRAY_BUFFER, verticesArray, webGL.STATIC_DRAW);
+
+        let indexbuffer = webGL.createBuffer();
+        webGL.bindBuffer(webGL.ELEMENT_ARRAY_BUFFER, indexbuffer);
+        let indicesArray = new Uint8Array(this.indices);
+        webGL.bufferData(webGL.ELEMENT_ARRAY_BUFFER, indicesArray, webGL.STATIC_DRAW);
 
         let pgm = shaderPgm.getProgram();
-        let position = gl.getAttribLocation(pgm, "a_vertexPosition");
-        gl.vertexAttribPointer(position, 4, gl.FLOAT, false, 0, 0);
-        gl.enableVertexAttribArray(position);
+        let position = webGL.getAttribLocation(pgm, "a_pos");
+        webGL.vertexAttribPointer(position, 4, webGL.FLOAT, false, 0, 0);
+        webGL.enableVertexAttribArray(position);
     }
 
-    indices(){
+    getIndices(){
         return this.indices;
     }
 
-    vertices(){
+    getVertices(){
         return this.vertices;
     }
 }

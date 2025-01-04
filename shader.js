@@ -5,21 +5,22 @@ class Shader {
         } else {
             this.shaderTypeNum = 1;
         }
+        console.log(shaderSource);
 
         this.shader = webGL.createShader(shaderType);
         webGL.shaderSource(this.shader, shaderSource);
         webGL.compileShader(this.shader);
 
-        if ( ! gl.getShaderParameter(this.shader, webGL.COMPILE_STATUS) ) {
+        if ( ! webGL.getShaderParameter(this.shader, webGL.COMPILE_STATUS) ) {
             throw new Error("Error in shader:  " + webGL.getShaderInfoLog(this.shader));
         }
     }
 
-    shader() {
+    getShader() {
         return this.shader;
     }
 
-    type() {
+    getType() {
         return this.shaderTypeNum;
     }
 }

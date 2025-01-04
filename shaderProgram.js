@@ -5,8 +5,9 @@ class ShaderProgram {
         this.webGL = webGL;
 
         this.program = webGL.createProgram();
-        this.webGL.attachShader(this.program, this.vertexShader.shader());
-        this.webGL.attachShader(this.program, this.fragmentShader.shader());
+        console.log(this.vertexShader);
+        this.webGL.attachShader(this.program, this.vertexShader.getShader());
+        this.webGL.attachShader(this.program, this.fragmentShader.getShader());
         this.webGL.linkProgram(this.program);
 
         if ( ! this.webGL.getProgramParameter( this.program, this.webGL.LINK_STATUS) ) {
@@ -18,7 +19,7 @@ class ShaderProgram {
         this.webGL.useProgram(this.program);
     }
 
-    program() {
+    getProgram() {
         return this.program;
     }
 }

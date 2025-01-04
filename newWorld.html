@@ -3,6 +3,27 @@
 <meta charset="UTF-8">
 <title>The Creation of a New World</title>
 
+<script id="vertex_shader" type="x-shader/x-vertex">
+    uniform mat4 u_viewMatrix;
+    uniform mat4 u_projectionMatrix;
+    uniform mat4 u_transformationMatrix;
+    attribute vec4 a_pos;
+    varying float v_cameraDist;
+    void main() {
+        gl_Position = u_projectionMatrix * u_viewMatrix * u_transformationMatrix * a_pos;
+        v_cameraDist = sqrt(pow(gl_Position.x, 2.0) + pow(gl_Position.y, 2.0) + pow(gl_Position.z, 2.0));
+    }
+</script>
+
+<script id="fragment_shader" type="x-shader/x-fragment">
+    precision mediump float;
+    uniform vec4 u_colour;
+    varying float v_cameraDist;
+    void main() {
+        gl_FragColor = vec4(u_colour[0]*2.0/v_cameraDist, u_colour[1]*2.0/v_cameraDist, u_colour[2]*2.0/v_cameraDist, u_colour[3]);
+    }
+</script>
+
 </head>
 <body>
 
@@ -13,16 +34,20 @@
     </div>
 
 </body>
-
-<script type="text/javascript" src="camera.js"></script>
-<script type="text/javascript" src="cuboid.js"></script>
 <script type="text/javascript" src="gl-matrix-min.js"></script>
-<script type="text/javascript" src="graphicsNode.js"></script>
-<script type="text/javascript" src="main.js"></script>
-<script type="text/javascript" src="material.js"></script>
-<script type="text/javascript" src="mesh.js"></script>
-<script type="text/javascript" src="monochromeMaterial.js"></script>
 <script type="text/javascript" src="shader.js"></script>
 <script type="text/javascript" src="shaderProgram.js"></script>
+<script type="text/javascript" src="mesh.js"></script>
+<script type="text/javascript" src="material.js"></script>
+<script type="text/javascript" src="monochromeMaterial.js"></script>
+<script type="text/javascript" src="cuboid.js"></script>
+<script type="text/javascript" src="graphicsNode.js"></script>
+<script type="text/javascript" src="camera.js"></script>
+<script type="text/javascript" src="main.js"></script>
+
+
+
+
+
 
 </html>

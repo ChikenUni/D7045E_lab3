@@ -1,6 +1,6 @@
 class material {
-    constructor(gl, shaderPgm){
-        this.gl = gl;
+    constructor(webGL, shaderPgm){
+        this.webGL = webGL;
         this.shaderPgm = shaderPgm;
     }
 
