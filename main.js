@@ -43,7 +43,7 @@ function init(){
     let greenMono = new monochromeMaterial(webGL, shaderPgm, [0.28, 0.74, 0.15, 1.0]);
 
     let playerCube = new cuboid(webGL, 0.4, 0.2, 0.6, shaderPgm);
-    let playerMatrix = [1,0,0,0, 0,1,0,0, 0,0,1,-1, 0,0,0,1]; // Identity matrix
+    let playerMatrix = [1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,-1,1]; // Identity matrix
     player = new GraphicsNode(playerCube, blueMono, playerMatrix, webGL);
     
 
